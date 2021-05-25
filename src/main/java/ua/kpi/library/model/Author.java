@@ -1,28 +1,49 @@
 package ua.kpi.library.model;
 
+import lombok.*;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Author extends Person {
+@Entity
+@Table(name = "authors")
+@ToString(exclude = {"books"})
+@Setter
+@Getter
+@EqualsAndHashCode
+@NoArgsConstructor
+public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+    private List<Book> books = new ArrayList<>();
+
+    protected String name;
+    protected String surname;
+    private Character sex;
+    protected LocalDate dob;
+
     protected final AtomicInteger numOfBooks = new AtomicInteger(0);
 
-    public Author() {
-        super();
-    }
-
-    public Author(String name, String surname) {
-        super(name, surname);
-    }
-
-    public Author(String name, String surname, String dob) {
-        super(name, surname, dob);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder strBuffer = new StringBuilder(this.name + " " + this.surname);
-        return strBuffer.toString();
-    }
+//    public Author() {
+//        super();
+//    }
+//
+//    public Author(String name, String surname) {
+//        super(name, surname);
+//    }
+//
+//    public Author(String name, String surname, String dob) {
+//        super(name, surname, dob);
+//    }
 
     public void incrementNumOfBooks() {
         this.numOfBooks.incrementAndGet();
@@ -46,5 +67,9 @@ public class Author extends Person {
         return Objects.hash(name, surname);
     }
 
-    public int getNumberOfBooks() { return this.numOfBooks.get(); }
+    public String getDobString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return this.dob.format(formatter);
+    }
+
 }

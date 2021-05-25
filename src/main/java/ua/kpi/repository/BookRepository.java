@@ -1,7 +1,9 @@
 package ua.kpi.repository;
 
 import jdk.jshell.spi.ExecutionControl;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import ua.kpi.library.exception.BookNotFoundException;
 import ua.kpi.library.model.Author;
 import ua.kpi.library.model.Book;
 import ua.kpi.library.model.BookGenreEnum;
@@ -11,28 +13,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Optional.of;
+
 @Repository
-public class BookRepository {
-    List<Book> test = new ArrayList<>(Arrays.asList(new Book(0), new Book(1, new Author("John", "Doe"), "Monitor", 1967, "Publish", 9.99, BookGenreEnum.ADVENTURE)));
+public interface BookRepository extends JpaRepository<Book, Long> {
 
-
-    public Book findBookById(long id) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("findBookById");
-    }
-
-    public Book createBook(long id, Author authorNew, String titleNew, int yearNew, String publisherNew, double costNew, BookGenreEnum genre) {
-        test.add(new Book(id, authorNew, titleNew, yearNew, publisherNew, costNew, genre));
-        return test.get(test.size()-1);
-    }
-
-    public Book updateBookById(Book book) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("updateBookById");
-    }
-
-    public List<Book> getAllBooks() {
-        return test;
-    }
-
-    public void deleteBook(long id) {
-    }
+    Book findBookByTitle(String title);
 }

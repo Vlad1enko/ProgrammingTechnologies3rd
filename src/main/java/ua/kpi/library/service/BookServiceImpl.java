@@ -1,5 +1,6 @@
 package ua.kpi.library.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.kpi.library.exception.BookNotFoundException;
@@ -13,6 +14,7 @@ import java.util.List;
 import static java.util.Optional.of;
 
 @Service
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService{
     @Autowired
     BookRepository bookRepository;
@@ -20,39 +22,28 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<Book> getBooks(){
-        return bookRepository.getAllBooks();
+        return bookRepository.findAll();
     }
 
     @Override
     public Book getBookByTitle(String title){
-        return of(title)
-                .map(t -> this.getBooks().stream()
-                        .filter(book -> book.getTitle().equals(t))
-                        .findAny()
-                        .orElseThrow(() -> new BookNotFoundException(title))
-
-                ).orElseThrow(() -> new RuntimeException("Exception that should never have happened"));
+        return bookRepository.findBookByTitle(title);
     }
 
     @Override
-    public Book createBook(Author authorNew, String titleNew, int yearNew, String publisherNew, double costNew, BookGenreEnum genre){
-        return bookRepository.createBook(serialNumberGenerator++, authorNew, titleNew, yearNew, publisherNew, costNew, genre);
+    public Book createBook(Book book){
+        return bookRepository.save(book);
     }
 
     @Override
-    public Book getBookById(long id){
-        return of(id)
-                .map(i -> this.getBooks().stream()
-                        .filter(book -> book.getSerialNumber() == i)
-                        .findAny()
-                        .orElseThrow(() -> new BookNotFoundException(id))
-
-                ).orElseThrow(() -> new RuntimeException("Exception that should never have happened"));
+    public Book getBookById(Long id){
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
     }
 
-    @Override
-    public Book updateBookById(Book book){
-        return new Book(book);
-    }
+//    @Override
+//    public Book updateBookById(Book book){
+//        return new Book(book);
+//    }
 
 }

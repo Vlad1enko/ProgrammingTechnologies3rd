@@ -2,9 +2,13 @@ package ua.kpi.context;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan(basePackages = {"ua.kpi.library.controller", "ua.kpi.library.service", "ua.kpi.repository"})
+@PropertySource("classpath:application.properties")
+@ComponentScan(basePackages = {"ua.kpi.library.controller", "ua.kpi.library.service"})
+@Import(HibernateConfCommon.class)
 public class Application {
 
 //    @Bean

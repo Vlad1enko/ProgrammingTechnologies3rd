@@ -1,5 +1,6 @@
 package ua.kpi.library.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ua.kpi.library.model.Author;
@@ -10,6 +11,7 @@ import ua.kpi.library.service.LibraryService;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class LibraryController {
     @Autowired
     private LibraryService libraryService;
