@@ -20,7 +20,7 @@ public class Library {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private final AtomicInteger capacity = new AtomicInteger(0);
 

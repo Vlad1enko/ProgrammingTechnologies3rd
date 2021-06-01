@@ -21,7 +21,7 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();

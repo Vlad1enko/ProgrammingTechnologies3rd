@@ -1,6 +1,5 @@
 package ua.kpi.library.service;
 
-import ua.kpi.library.exception.BookNotFoundException;
 import ua.kpi.library.model.Author;
 import ua.kpi.library.model.Book;
 import ua.kpi.library.model.BookGenreEnum;
@@ -12,5 +11,12 @@ public interface BookService {
 
     Book getBookByTitle(String title);
     Book createBook(Book book);
-    Book getBookById(Long id);
+    Book getBookById(Integer id);
+    List<Book> getBooksOfAuthor(Author author);
+    List<Book> getBooksOfGenre(BookGenreEnum genreEnum);
+    List<Book> getBooksOfUser(Integer userId);
+    void saveBookOfUser(Integer userId, Book book);
+    void deleteBook(Integer bookId);
+    Book updateBook(Book book);
+    void addBookToLibrary(Integer libraryId, Integer bookId);
 }

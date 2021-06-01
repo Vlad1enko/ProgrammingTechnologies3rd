@@ -9,7 +9,7 @@ public class BookNotFoundException extends NoSuchElementException {
     public BookNotFoundException(String title) {
         super("No book with title " + title + " found");
     }
-    public BookNotFoundException(long id) {
+    public BookNotFoundException(Integer id) {
         super("No book with id " + id + " found");
     }
     public BookNotFoundException(Author author) {

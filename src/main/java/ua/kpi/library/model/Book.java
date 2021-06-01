@@ -19,9 +19,9 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private long serialNumber;
+    private Integer serialNumber;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -29,6 +29,11 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @Setter
+    private User user;
 
     private String title;
     private int year;

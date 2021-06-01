@@ -1,0 +1,27 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="ua.kpi.essd-test.jpa">
+
+        <class>ua.kpi.library.model.Library</class>
+        <class>ua.kpi.library.model.Author</class>
+        <class>ua.kpi.library.model.Book</class>
+        <class>ua.kpi.library.model.User</class>
+        <class>ua.kpi.library.model.Order</class>
+        <class>ua.kpi.library.model.Role</class>
+
+        <properties>
+            <property name="hibernate.connection.driver" value="org.h2.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:h2:mem:test_clothes_designer;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;"/>
+            <property name="hibernate.connection.user" value="test"/>
+            <property name="hibernate.connection.password" value="test"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.import_files" value="data-h2.sql"/>
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

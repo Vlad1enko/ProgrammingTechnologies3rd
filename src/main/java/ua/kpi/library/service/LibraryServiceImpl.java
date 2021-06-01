@@ -4,75 +4,58 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.kpi.library.exception.BookNotFoundException;
-import ua.kpi.library.model.Author;
-import ua.kpi.library.model.Book;
-import ua.kpi.library.model.BookGenreEnum;
+import ua.kpi.library.model.Library;
+import ua.kpi.repository.LibraryRepository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Optional.of;
 
 @Service
 @RequiredArgsConstructor
 public class LibraryServiceImpl implements LibraryService {
     @Autowired
-    private BookService bookService;
+    private LibraryService bookService;
+
+    @Autowired
+    LibraryRepository libraryRepository;
 
     @Override
-    public List<Book> getBooksOfAuthor(Author author) {
-        return null;
+    public Library getLibraryById(Integer id) {
+        return libraryRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
     }
 
     @Override
-    public List<Book> getBooksOfTheSameGenre(Book book) {
-        return null;
+    public List<Library> getLibraries() {
+        return libraryRepository.findAll();
     }
 
     @Override
-    public Book getBookByTitle(String title) {
-        return null;
+    public Library createLibrary(Library library) {
+        return libraryRepository.save(library);
     }
 
     @Override
-    public Book getBookById(long id) {
-        return null;
+    public Library updateLibrary(Library library) {
+        return libraryRepository.save(library);
     }
 
     @Override
-    public List<Book> getBooks() {
-        return null;
-    }
-
-    @Override
-    public Book createBook(Author authorNew, String titleNew, int yearNew, String publisherNew, double costNew, BookGenreEnum genre) {
-        return null;
-    }
-
-    @Override
-    public Author createAuthor(String name, String surname, String dob) {
-        return null;
-    }
-
-    @Override
-    public Author createAuthor(String name, String surname) {
-        return null;
-    }
-
-    @Override
-    public Book updateBookById(Book book) {
-        return null;
+    public void deleteLibraryById(Integer id) {
+        try {
+            libraryRepository.deleteById(id);
+        } catch (Exception exception) {
+            throw new BookNotFoundException(id);
+        }
     }
 //
 //    @Override
-//    public List<Book> getBooksOfAuthor(Author author) {
+//    public List<Library> getLibrarysOfAuthor(Author author) {
 //        return of(author)
-//                .map(a -> bookService.getBooks().stream()
+//                .map(a -> bookService.getLibrarys().stream()
 //                        .filter(book -> book.getAuthor().equals(a))
 //                        .collect(Collectors.collectingAndThen(Collectors.toList(), result -> {
 //                            if ( result.isEmpty()) {
-//                                throw new BookNotFoundException(author);
+//                                throw new LibraryNotFoundException(author);
 //                            }
 //                            return result;
 //                        }))
@@ -80,14 +63,14 @@ public class LibraryServiceImpl implements LibraryService {
 //    }
 //
 //    @Override
-//    public Book getBookById(long id) {
-//        return bookService.getBookById(id);
+//    public Library getLibraryById(Integer id) {
+//        return bookService.getLibraryById(id);
 //    }
 //
 //    @Override
-//    public List<Book> getBooksOfTheSameGenre(Book book) {
+//    public List<Library> getLibrarysOfTheSameGenre(Library book) {
 //        return of(book)
-//                .map(b -> bookService.getBooks().stream()
+//                .map(b -> bookService.getLibrarys().stream()
 //                        .filter(bookFilter -> bookFilter.getGenre().equals(b.getGenre()))
 //                        .collect(Collectors.collectingAndThen(Collectors.toList(), collected -> {
 //                            Collections.shuffle(collected);
@@ -96,7 +79,7 @@ public class LibraryServiceImpl implements LibraryService {
 //                        .limit(5)
 //                        .collect(Collectors.collectingAndThen(Collectors.toList(), result -> {
 //                            if ( result.isEmpty()) {
-//                                throw new BookNotFoundException(book.getGenre());
+//                                throw new LibraryNotFoundException(book.getGenre());
 //                            }
 //                            return result;
 //                        }))
@@ -104,16 +87,16 @@ public class LibraryServiceImpl implements LibraryService {
 //    }
 //
 //    @Override
-//    public Book getBookByTitle(String title) {
-//        return bookService.getBookByTitle(title);
+//    public Library getLibraryByTitle(String title) {
+//        return bookService.getLibraryByTitle(title);
 //    }
 //
-//    public List<Book> getBooks(){
-//        return bookService.getBooks();
+//    public List<Library> getLibrarys(){
+//        return bookService.getLibrarys();
 //    }
 //
-//    public Book createBook( Author authorNew, String titleNew, int yearNew, String publisherNew, double costNew, BookGenreEnum genre) {
-//        return bookService.createBook(authorNew, titleNew, yearNew, publisherNew, costNew, genre);
+//    public Library createLibrary( Author authorNew, String titleNew, int yearNew, String publisherNew, double costNew, LibraryGenreEnum genre) {
+//        return bookService.createLibrary(authorNew, titleNew, yearNew, publisherNew, costNew, genre);
 //    }
 //
 //    public Author createAuthor(String name, String surname, String dob) {
@@ -124,11 +107,11 @@ public class LibraryServiceImpl implements LibraryService {
 //        return new Author(name, surname);
 //    }
 //
-//    public Book updateBookById(Book book) {
-//        return bookService.updateBookById(book);
+//    public Library updateLibraryById(Library book) {
+//        return bookService.updateLibraryById(book);
 //    }
 //
-//    public LibraryService setBookService(BookService bookService) {
+//    public LibraryService setLibraryService(LibraryService bookService) {
 //        this.bookService = bookService;
 //        return this;
 //    }
