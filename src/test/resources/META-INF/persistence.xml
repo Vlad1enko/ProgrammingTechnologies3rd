@@ -12,6 +12,7 @@
         <class>ua.kpi.library.model.Order</class>
         <class>ua.kpi.library.model.Role</class>
 
+
         <properties>
             <property name="hibernate.connection.driver" value="org.h2.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:h2:mem:tests;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;"/>

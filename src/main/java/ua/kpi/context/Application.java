@@ -21,25 +21,5 @@ public class Application extends SpringBootServletInitializer {
 //    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 //        return new JpaTransactionManager(emf);
 //    }
-//    @Bean
-//    public LibraryController libraryApi() {
-//        return new LibraryController(libraryService());
-//    }
-//
-//    @Bean
-//    public LibraryService libraryService() {
-//        final LibraryServiceImpl departmentService = new LibraryServiceImpl();
-//        return departmentService.setBookService(bookService());
-//    }
-//
-//    @Bean
-//    public BookService bookService() {
-//        return new BookServiceImpl(bookRepository());
-//    }
-//
-//    @Bean
-//    protected BookRepository bookRepository() {
-//        return new BookRepository();
-//    }
 
 }
