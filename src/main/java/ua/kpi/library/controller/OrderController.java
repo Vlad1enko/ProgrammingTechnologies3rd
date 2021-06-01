@@ -14,8 +14,8 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping
-    public void createOrder(@RequestParam Integer userId, @RequestParam Integer clothingId, @RequestParam Integer amount) {
-        orderService.saveOrder(userId, clothingId, amount);
+    public void createOrder(@RequestParam Integer userId, @RequestParam Integer bookId, @RequestParam Integer amount) {
+        orderService.saveOrder(userId, bookId, amount);
     }
 
     @GetMapping("/{orderId}")

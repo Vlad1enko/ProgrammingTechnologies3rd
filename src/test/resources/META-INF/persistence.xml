@@ -14,7 +14,7 @@
 
         <properties>
             <property name="hibernate.connection.driver" value="org.h2.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:h2:mem:test_clothes_designer;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;"/>
+            <property name="hibernate.connection.url" value="jdbc:h2:mem:tests;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;"/>
             <property name="hibernate.connection.user" value="test"/>
             <property name="hibernate.connection.password" value="test"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
