@@ -29,7 +29,7 @@ public class BookController {
         return bookService.getBooksOfUser(userId);
     }
 
-    @PostMapping("/add_to_set")
+    @PostMapping("/add_to_library")
     public void addBookToLibrary(@RequestParam Integer libraryId, @RequestParam Integer bookId) {
         bookService.addBookToLibrary(libraryId, bookId);
     }
